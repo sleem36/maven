@@ -14,7 +14,7 @@ public class Util {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             connection = DriverManager.getConnection(DB_URL, DB_USERNAME, DB_PASSWORD);
-            System.out.println("Connection to Store DB succesfull!");
+            System.out.println("Connection to User DB succesfull!");
         } catch (Exception ex) {
             ex.printStackTrace();
             System.out.println("Connection ERROR!");

@@ -6,15 +6,15 @@ import java.sql.SQLException;
 import java.util.List;
 
 public interface UserService {
-    void createUsersTable();
+    void createUsersTable() throws ClassNotFoundException, SQLException;
 
-    void dropUsersTable();
+    void dropUsersTable() throws ClassNotFoundException, SQLException;
 
-    void saveUser(String name, String lastName, byte age) throws SQLException;
+    void saveUser(String name, String lastName, byte age) throws SQLException, ClassNotFoundException;
 
-    void removeUserById(long id);
+    void removeUserById(long id) throws ClassNotFoundException, SQLException;
 
     List<User> getAllUsers() throws SQLException;
 
-    void cleanUsersTable();
+    void cleanUsersTable() throws SQLException, ClassNotFoundException;
 }
