@@ -10,22 +10,21 @@ import java.util.List;
 
 public class UserServiceImpl extends Util implements UserService {
 
-    //UserDaoJDBCImpl dop = new UserDaoJDBCImpl(); // добавил
     //Connection connection = getConnection();
     Connection connection = getConnection();
 
-    static final String DATABASE_URL = "jdbc:mysql://localhost/maven";
-    static final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
-
-    static final String USER = "root";
-    static final String PASSWORD = "";
+//    static final String DATABASE_URL = "jdbc:mysql://localhost/maven";
+//    static final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
+//
+//    static final String USER = "root";
+//    static final String PASSWORD = "";
     public void createUsersTable() throws ClassNotFoundException, SQLException {
-
-            Connection connection = null;
+            Util s = new Util();
+          //  Connection connection = null;
             Statement statement = null;
             try {
-                connection = DriverManager.getConnection(DATABASE_URL, USER, PASSWORD);
-                statement = connection.createStatement();
+                //connection = DriverManager.getConnection(DATABASE_URL, USER, PASSWORD);
+                statement = s.getConnection().createStatement();
 
                 String SQL = "CREATE TABLE maven.Users " +
                         "(id INTEGER not NULL AUTO_INCREMENT, " +
@@ -47,17 +46,19 @@ public class UserServiceImpl extends Util implements UserService {
     }
 
     public void dropUsersTable() throws ClassNotFoundException, SQLException {
-        Connection connection = null;
+        Util s = new Util();
+        //Connection connection = null;
         Statement statement = null;
         try {
-            System.out.println("Registering JDBC driver...");
-            Class.forName(JDBC_DRIVER);
+          //  System.out.println("Registering JDBC driver...");
+          //  Class.forName(JDBC_DRIVER);
 
-            System.out.println("Creating connection to database...");
-            connection = DriverManager.getConnection(DATABASE_URL, USER, PASSWORD);
+        //    System.out.println("Creating connection to database...");
+        //    connection = DriverManager.getConnection(DATABASE_URL, USER, PASSWORD);
 
-            System.out.println("Removing table in selected database...");
-            statement = connection.createStatement();
+           // System.out.println("Removing table in selected database...");
+            //statement = connection.createStatement();
+            statement = s.getConnection().createStatement();
 
             String SQL = "DROP TABLE maven.Users";
             //String SQL = "DELETE FROM Users";
@@ -77,12 +78,14 @@ public class UserServiceImpl extends Util implements UserService {
     }
 
     public void saveUser(String name, String lastName, byte age) throws SQLException, ClassNotFoundException {
-        Class.forName(JDBC_DRIVER);
-        Connection connection = DriverManager.getConnection("jdbc:mysql://localhost/maven", "root", "");
+        Util s = new Util();
+
+     //   Class.forName(JDBC_DRIVER);
+       // Connection connection = DriverManager.getConnection("jdbc:mysql://localhost/maven", "root", "");
 
         String query = "INSERT INTO maven.Users (name, lastName, age) VALUES (?, ?, ?)";
         //String query = "INSERT INTO Users (name, lastName, age) VALUES (name, lastName, age)";
-        PreparedStatement preparedStatement = connection.prepareStatement(query);
+        PreparedStatement preparedStatement = s.getConnection().prepareStatement(query);
 
         preparedStatement.setString(1, name);
         preparedStatement.setString(2, lastName);
@@ -121,12 +124,13 @@ public class UserServiceImpl extends Util implements UserService {
     }
 
     public void removeUserById(long id) throws ClassNotFoundException, SQLException {
-        Class.forName(JDBC_DRIVER);
-        Connection connection = DriverManager.getConnection("jdbc:mysql://localhost/maven", "root", "");
+        Util s = new Util();
+     //   Class.forName(JDBC_DRIVER);
+        //Connection connection = DriverManager.getConnection("jdbc:mysql://localhost/maven", "root", "");
 
         String query = "DELETE FROM Users WHERE id = " + id;
         //String query = "INSERT INTO Users (name, lastName, age) VALUES (name, lastName, age)";
-        PreparedStatement preparedStatement = connection.prepareStatement(query);
+        PreparedStatement preparedStatement = s.getConnection().prepareStatement(query);
 
         //preparedStatement.setInt(3, age);
 
@@ -134,13 +138,14 @@ public class UserServiceImpl extends Util implements UserService {
     }
 
     public List<User> getAllUsers() throws SQLException {
+        Util s = new Util();
         List<User> users = new ArrayList<>();
 
         String sql = "SELECT name, lastName, age FROM Users";
 
         Statement statement = null;
         try {
-            statement =  connection.createStatement();
+            statement =  s.getConnection().createStatement();
             ResultSet resultSet = statement.executeQuery(sql);
             while (resultSet.next()) {
                 User user = new User();
@@ -166,17 +171,18 @@ public class UserServiceImpl extends Util implements UserService {
     }
 
     public void cleanUsersTable() throws SQLException, ClassNotFoundException {
-        Connection connection = null;
+        //Connection connection = null;
+        Util s = new Util();
         Statement statement = null;
         try {
             System.out.println("Registering JDBC driver...");
-            Class.forName(JDBC_DRIVER);
+        //    Class.forName(JDBC_DRIVER);
 
             System.out.println("Creating connection to database...");
-            connection = DriverManager.getConnection(DATABASE_URL, USER, PASSWORD);
+        //    connection = DriverManager.getConnection(DATABASE_URL, USER, PASSWORD);
 
             System.out.println("Removing table in selected database...");
-            statement = connection.createStatement();
+            statement = s.getConnection().createStatement();
 
             String SQL = "DELETE FROM Users";
 

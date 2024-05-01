@@ -15,8 +15,8 @@ public class Main {
             //UserDao userDao = new UserDaoJDBCImpl();
             UserService userDao = new UserServiceImpl();
 //
-//            userDao.createUsersTable();
-            userDao.dropUsersTable();
+            userDao.createUsersTable();
+//            userDao.dropUsersTable();
 //            userDao.createUsersTable();
 //
 //            userDao.saveUser("Name1", "LastName1", (byte) 20);
